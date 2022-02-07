@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // import mongoose
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema( // create schema
   {
     username: {
       type: String,
       required: true,
-      unique: true,
+      unique: true, // if you wanna set this value as only one
     },
     email: {
       type: String,
@@ -24,4 +24,7 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model(
+  "User", // model name
+  UserSchema // schema name
+); // export shema
