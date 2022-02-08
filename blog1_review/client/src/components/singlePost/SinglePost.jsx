@@ -5,24 +5,29 @@ import { Context } from "../../context/Context";
 import "./singlePost.css";
 
 export default function SinglePost() {
-  const location = useLocation();
-  const path = location.pathname.split("/")[2];
-  const [post, setPost] = useState({});
+  const location = useLocation(); // fetch data according to /id
+  const path = location.pathname.split("/")[2]; // take pathname from useLocation function and split this to use just id(after /post/)
+  const [post, setPost] = useState({}); // initial state is going to be an empty obj. cuz we haven't fetched any data yet
   const PF = "http://localhost:5000/images/";
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
 
-  useEffect(() => {
-    const getPost = async () => {
-      const res = await axios.get("/posts/" + path);
-      setPost(res.data);
-      setTitle(res.data.title);
-      setDesc(res.data.desc);
-    };
-    getPost();
-  }, [path]);
+  useEffect(
+    () => {
+      const getPost = async () => {
+        const res = await axios.get("/posts/" + path);
+        //fetch post on /posts/user_id
+        //fetch data
+        setPost(res.data);
+        setTitle(res.data.title);
+        setDesc(res.data.desc);
+      };
+      getPost();
+    }, //imperative function that can return a cleanup function
+    [path] //If present, effect will only activate if the values in the list change.
+  );
 
   const handleDelete = async () => {
     try {
@@ -82,6 +87,7 @@ export default function SinglePost() {
             <Link to={`/?user=${post.username}`} className="link">
               <b>{post.username}</b>
             </Link>
+            {/* if click this link go to user's post page */}
           </span>
           <span className="singlePostDate">
             {new Date(post.createdAt).toDateString()}

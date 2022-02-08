@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 
 export default function Sidebar() {
-  const [cats, setCats] = useState([]);
+  const [cats, setCats] = useState([]); // initial state is going to be an empty arr. cuz we haven't fetched any data yet
 
-  useEffect(() => {
-    const getCats = async () => {
-      const res = await axios.get("/categories");
-      setCats(res.data);
-    };
-    getCats();
-  }, []);
+  useEffect(
+    () => {
+      const getCats = async () => {
+        const res = await axios.get("/categories"); // call categories
+        setCats(res.data);
+      };
+      getCats();
+    },
+    [] // fire this at the beginning
+  );
 
   return (
     <div className="sidebar">
@@ -38,6 +41,8 @@ export default function Sidebar() {
               </li>
             </Link>
           ))}
+          {/*cats is array so we can use array function.
+          if click this link go to clicked categories' post page */}
         </ul>
       </div>
 

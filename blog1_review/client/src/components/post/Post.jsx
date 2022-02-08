@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // need to import for using Link
 import "./post.css";
 
-export default function post({ post }) {
+export default function post(
+  { post } // prop from Posts.jsx
+) {
   const PF = "http://localhost:5000/images/";
   return (
     <div className="post">
+      {/*post.<something> is values coming from saved data in mongoDB by Post.js & posts.js
+      back(Post.js → posts.js → mongoDB) → front(Post.jsx)
+      */}
       {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
 
       <div className="postInfo">
@@ -17,15 +22,23 @@ export default function post({ post }) {
         </div>
 
         <Link className="link" to={`/post/${post._id}`}>
-          <span className="postTitle">{post.title}</span>
+          {/*if click postTitle you transfer to /post/${post._id} URL */}
+          <span className="postTitle">
+            {post.title}
+            {/*take title from post */}
+          </span>
         </Link>
 
         <span className="postDate">
           {new Date(post.createdAt).toDateString()}
+          {/*take date from post */}
         </span>
       </div>
 
-      <p className="postDesc">{post.desc}</p>
+      <p className="postDesc">
+        {post.desc}
+        {/*take desc from post */}
+      </p>
     </div>
   );
 }
