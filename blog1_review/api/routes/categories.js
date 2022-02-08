@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   const newCat = new Category(req.body); // take everything inside body into Category
   try {
     const savedCat = await newCat.save(); // save category
-    res.status(200).json(savedCat);
+    res.status(200).json(savedCat); // if success send savedCat
   } catch (err) {
     res.status(500).json(err);
   }
@@ -16,8 +16,8 @@ router.post("/", async (req, res) => {
 //get all categories
 router.get("/", async (req, res) => {
   try {
-    const cats = await Category.find();
-    res.status(200).json(cats);
+    const cats = await Category.find(); // gets a list of documents that match filter
+    res.status(200).json(cats); // if success send cats
   } catch (err) {
     res.status(500).json(err);
   }

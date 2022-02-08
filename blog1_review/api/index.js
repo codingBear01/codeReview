@@ -5,8 +5,8 @@ const mongoose = require("mongoose"); // import mongoose
 const authRoute = require("./routes/auth"); // import routes file auth
 const userRoute = require("./routes/users"); // import routes file users
 const postRoute = require("./routes/posts"); // import routes file posts
-const categoryRoute = require("./routes/categories");
-const multer = require("multer");
+const categoryRoute = require("./routes/categories"); // import routes file categories
+const multer = require("multer"); // import multer library
 const path = require("path");
 
 dotenv.config(); // use dotenv
@@ -33,18 +33,29 @@ await mongoose.connect('mongodb://localhost:27017/test', {
 });*/
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
+  // returns a StorageEngine implementation configured to store files on the local system
+  destination: (
+    req,
+    file,
+    cb // callback function takes care of our arrows if there is any error
+  ) => {
+    cb(null, "images"); // create a storage
   },
   filename: (req, file, cb) => {
-    cb(null, req.body.name);
+    cb(null, req.body.name); // send file name to react file
   },
 });
 
-const upload = multer({ storage: storage }); // use my app on web
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded!");
-});
+const upload = multer({
+  storage: storage, // this storage is that we set above
+}); // use my app on web
+app.post(
+  "/api/upload",
+  upload.single("file"), // upload only one file
+  (req, res) => {
+    res.status(200).json("File has been uploaded!");
+  }
+);
 
 // connect to URL_routes files
 app.use("/api/auth", authRoute);
@@ -67,9 +78,9 @@ app.listen("5000",
   console.log("Backend is running!");
 });
 
-- ÀÔ·Â ÈÄ package.json¿¡¼­ "start": "nodemon index.js"·Î ¼öÁ¤
+- ï¿½Ô·ï¿½ ï¿½ï¿½ package.jsonï¿½ï¿½ï¿½ï¿½ "start": "nodemon index.js"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 - nodemon index.js
 
-.env ÆÄÀÏ ¾È¿¡ º¸¾È À¯Áö ÇÊ¿äÇÑ »çÇ× ÀÔ·Â ex) mongoDB code
+.env ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ex) mongoDB code
 
 */
