@@ -5,7 +5,7 @@ const Post = require("../models/Post"); // Post model used in this js
 // CREATE POST
 router.post("/", async (req, res) => {
   // create new post
-  const newPost = new Post(req.body); // take everythiong inside body into post
+  const newPost = new Post(req.body); // take everything inside body into Post
 
   try {
     const savedPost = await newPost.save(); // save post
@@ -95,4 +95,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router; // export routes file
