@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import "./register.css";
 
 export default function Register() {
-  const [username, setUsername] = useState("");
+  //you can use context api for register, but we are gonna store everything after login process.
+  const [username, setUsername] = useState(""); //initial useState is empty
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
