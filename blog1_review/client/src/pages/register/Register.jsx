@@ -11,17 +11,17 @@ export default function Register() {
   const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //to prevent refresh the page when you click the submit btn
     setError(false);
     try {
       const res = await axios.post("/auth/register", {
         username,
         email,
         password,
-      });
-      res.data && window.location.replace("/login");
+      }); //create new user
+      res.data && window.location.replace("/login"); //if you register successfully you will be redirected to login page
     } catch (err) {
-      setError(true);
+      setError(true); //if there is an error setError is gonna be true
     }
   };
 
@@ -29,13 +29,16 @@ export default function Register() {
     <div className="register">
       <span className="registerTitle">Register</span>
 
-      <form className="registerForm" onSubmit={handleSubmit}>
+      <form
+        className="registerForm"
+        onSubmit={handleSubmit} //submit this form
+      >
         <label>Username</label>
         <input
           className="registerInput"
           type="text"
           placeholder="Please Enter Your Name"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)} //whenever you change input value, it will be sent to DB
         />
 
         <label>Email</label>
@@ -43,7 +46,7 @@ export default function Register() {
           className="registerInput"
           type="email"
           placeholder="Please Enter Your Email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)} //whenever you change input value, it will be sent to DB
         />
 
         <label>Password</label>
@@ -51,7 +54,7 @@ export default function Register() {
           className="registerInput"
           type="password"
           placeholder="Please Enter Your Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} //whenever you change input value, it will be sent to DB
         />
 
         <button className="registerButton" type="submit">
@@ -69,6 +72,7 @@ export default function Register() {
           Please enter another username or e-mail address
         </span>
       )}
+      {/*if "error" is ture this msg will be indicated */}
     </div>
   );
 }

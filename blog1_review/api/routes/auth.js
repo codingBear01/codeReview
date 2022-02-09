@@ -9,10 +9,10 @@ we don't know how it take to connect to DB and create new one and return res. so
 
 req: what we send our server
 res: after req. server return result
-post: create new one
-put: update, exist
-delete: delete
-get: fetch, not change*/
+post(C): create new one
+get(R): fetch, not change
+put(U): update, exist
+delete(D): delete*/
   try {
     // if use async fun. need to "try and catch"
     const salt = await bcrypt.genSalt(10);
