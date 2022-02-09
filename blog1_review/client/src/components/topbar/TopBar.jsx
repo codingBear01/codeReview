@@ -46,6 +46,7 @@ export default function TopBar() {
 
           <li className="topListItem" onClick={handleLogout}>
             {user && "LOGOUT"}
+            {/*if you click this logout user changed null, isFetching and error will be false */}
           </li>
         </ul>
       </div>
@@ -54,6 +55,7 @@ export default function TopBar() {
         {user ? (
           <Link to={"/settings"}>
             <img className="topImg" src={PF + user.profilePic} alt="" />
+            {/*shortcut from models/User.js*/}
           </Link>
         ) : (
           <ul className="topList">

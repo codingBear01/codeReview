@@ -5,12 +5,22 @@ import "./write.css";
 
 export default function Write() {
   const [title, setTitle] = useState("");
+  /*
+(alias) useState<string>(initialState: string | (() => string)): [string, React.Dispatch<React.SetStateAction<string>>] (+1 overload)
+import useState
+
+Returns a stateful value, and a function to update it.*/
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
+  /*
+(alias) function useContext<T>(context: Context<T>): T
+import useContext
 
+Accepts a context object (the value returned from React.createContext) and returns the current context value, as given by the nearest context provider for the given context.
+*/
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //to prevent refresh the page
     const newPost = {
       username: user.username,
       title,

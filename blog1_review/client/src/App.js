@@ -11,7 +11,14 @@ import { Context } from "./context/Context";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  const { user } = useContext(Context);
+  const { user } = useContext(Context); //fetch this from Context.js
+  /*
+  = const INITIAL_STATE = {
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isFetching: false,
+  error: false,
+  }; 
+  */
 
   return (
     <Router>
