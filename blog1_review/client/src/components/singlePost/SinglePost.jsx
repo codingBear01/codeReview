@@ -32,7 +32,7 @@ export default function SinglePost() {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${post._id}`, {
-        data: { username: user.username },
+        data: { username: user.username }, //you can send data directly cuz you use delete method
       });
       window.location.replace("/"); // if delete this page, redirect to main page
     } catch (err) {}
@@ -66,7 +66,7 @@ export default function SinglePost() {
         ) : (
           <h1 className="singlePostTitle">
             {title}
-            {post.username === user?.username && (
+            {post.username === user?.username && ( //if post.username match with user?.username you can see buttons
               <div className="singlePostEdit">
                 <i
                   className="singPostIcon far fa-edit"
@@ -107,6 +107,7 @@ export default function SinglePost() {
             Update
           </button>
         )}
+        {/*only in updateMode you can see update btn */}
       </div>
     </div>
   );

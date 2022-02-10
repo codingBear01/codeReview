@@ -92,6 +92,7 @@ export default function Setting() {
           {success && (
             <span className="updated-msg">Profile has been updated!</span>
           )}
+          {/*if success is true this mgs will be indicated */}
         </form>
       </div>
       <Sidebar />

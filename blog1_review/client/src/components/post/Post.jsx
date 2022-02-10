@@ -4,7 +4,7 @@ import "./post.css";
 export default function post(
   { post } // prop from Posts.jsx
 ) {
-  const PF = "http://localhost:5000/images/";
+  const PF = "http://localhost:5000/images/"; //set img uploading URL
   return (
     <div className="post">
       {/*post.<something> is values coming from saved data in mongoDB by Post.js & posts.js

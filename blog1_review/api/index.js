@@ -7,7 +7,7 @@ const userRoute = require("./routes/users"); // import routes file users
 const postRoute = require("./routes/posts"); // import routes file posts
 const categoryRoute = require("./routes/categories"); // import routes file categories
 const multer = require("multer"); // import multer library
-const path = require("path");
+const path = require("path"); // import path library
 
 dotenv.config(); // use dotenv
 app.use(express.json()); // send any json object to update information

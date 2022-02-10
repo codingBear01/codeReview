@@ -27,19 +27,31 @@ Accepts a context object (the value returned from React.createContext) and retur
       desc,
     };
 
-    if (file) {
+    if (
+      file //if there is a file
+    ) {
       const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
-      data.append("file", file);
-      newPost.photo = filename;
+      /*
+var FormData: new (form?: HTMLFormElement) => FormData
+
+Provides a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the XMLHttpRequest.send() method. It uses the same format a form would use if the encoding type were set to "multipart/form-data".
+*/
+      const filename = Date.now() + file.name; //create random number to prevent same name of uploaded image
+      data.append("name", filename); //add name of data
+      data.append("file", file); //add file of data
+      newPost.photo = filename; //add new post and filename
       try {
-        await axios.post("/upload", data);
+        await axios.post("/upload", data); //upload at this URL & data
       } catch (err) {}
     }
     try {
-      const res = await axios.post("/posts", newPost);
-      window.location.replace("/post/" + res.data._id);
+      const res = await axios.post(
+        "/posts",
+        newPost //respose this newPost
+      ); //after uploading send this post here
+      window.location.replace(
+        "/post/" + res.data._id //write post id
+      ); //after sending post return to single page
     } catch (err) {}
   };
 
@@ -48,6 +60,8 @@ Accepts a context object (the value returned from React.createContext) and retur
       {file && (
         <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
       )}
+      {/*if there is a file use this img.
+      create a URL for this file and gonna be able to see this at URL*/}
 
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -60,12 +74,14 @@ Accepts a context object (the value returned from React.createContext) and retur
             style={{ display: "none" }}
             onChange={(e) => setFile(e.target.files[0])}
           />
+          {/*set uploaded file. upload just sing file idx num 0 */}
           <input
             className="writeInput"
             type="text"
             placeholder="Title"
             onChange={(e) => setTitle(e.target.value)}
           />
+          {/*upload title*/}
         </div>
 
         <div className="writeFormGroup">
@@ -75,6 +91,7 @@ Accepts a context object (the value returned from React.createContext) and retur
             placeholder="Tell your story..."
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
+          {/*upload desc*/}
         </div>
 
         <button className="writeSubmit" type="submit">
